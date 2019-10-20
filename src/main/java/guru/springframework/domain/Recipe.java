@@ -35,8 +35,8 @@ public class Recipe {
 
     @ManyToMany
     @JoinTable(name = "RECIPE_CATEGORY", joinColumns =
-        @JoinColumn(name = "RECIPE_ID"),
-    inverseJoinColumns = @JoinColumn(name = "CATEGORY_ID"))
+    @JoinColumn(name = "RECIPE_ID"),
+            inverseJoinColumns = @JoinColumn(name = "CATEGORY_ID"))
     private Set<Category> categories;
 
     public Long getId() {
