@@ -71,8 +71,8 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
 
         Recipe guacamole = new Recipe();
         recipeSet.add(guacamole);
-        guacamole.getCategories().add(mexican);
-        guacamole.getCategories().add(american);
+        guacamole.addCategory(mexican);
+        guacamole.addCategory(american);
         guacamole.setDifficulty(Difficulty.EASY);
         guacamole.setCookTime(0);
         guacamole.setPrepTime(10);
@@ -107,67 +107,16 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
                 "\n" +
                 "For a deviled egg version with guacamole, try our Guacamole Deviled Eggs!\n");
 
-        Set<Ingredient> ingredients = new HashSet<>();
+        guacamole.addIngredient(new Ingredient("Avocado", BigDecimal.valueOf(2L), each));
+        guacamole.addIngredient(new Ingredient("Salt", BigDecimal.valueOf(1.5), teaspoon));
+        guacamole.addIngredient(new Ingredient("Lime juice", BigDecimal.ONE, tablespoon));
+        guacamole.addIngredient(new Ingredient("Minced red onion", BigDecimal.valueOf(2L), tablespoon));
+        guacamole.addIngredient(new Ingredient("Serrano chili", BigDecimal.valueOf(2L), each));
+        guacamole.addIngredient(new Ingredient("Cilantro", BigDecimal.valueOf(2L), tablespoon));
+        guacamole.addIngredient(new Ingredient("Black pepper", BigDecimal.ONE, dash));
+        guacamole.addIngredient(new Ingredient("Tomato", BigDecimal.valueOf(0.5), each));
 
-        Ingredient avocado = new Ingredient();
-        avocado.setRecipe(guacamole);
-        avocado.setAmount(BigDecimal.valueOf(2L));
-        avocado.setDescription("Avocado");
-        avocado.setUom(each);
-        ingredients.add(avocado);
-
-        Ingredient salt = new Ingredient();
-        salt.setRecipe(guacamole);
-        salt.setAmount(BigDecimal.valueOf(1.5));
-        salt.setDescription("Salt");
-        salt.setUom(teaspoon);
-        ingredients.add(salt);
-
-        Ingredient limeJuice = new Ingredient();
-        limeJuice.setRecipe(guacamole);
-        limeJuice.setAmount(BigDecimal.ONE);
-        limeJuice.setDescription("Lime juice");
-        limeJuice.setUom(tablespoon);
-        ingredients.add(limeJuice);
-
-        Ingredient redOnion = new Ingredient();
-        redOnion.setRecipe(guacamole);
-        redOnion.setDescription("Minced red onion");
-        redOnion.setAmount(BigDecimal.valueOf(2L));
-        redOnion.setUom(tablespoon);
-        ingredients.add(redOnion);
-
-        Ingredient chili = new Ingredient();
-        chili.setRecipe(guacamole);
-        chili.setDescription("Serrano chili");
-        chili.setAmount(BigDecimal.valueOf(2L));
-        chili.setUom(each);
-        ingredients.add(chili);
-
-        Ingredient cilantro = new Ingredient();
-        cilantro.setRecipe(guacamole);
-        cilantro.setDescription("Cilantro");
-        cilantro.setAmount(BigDecimal.valueOf(2L));
-        cilantro.setUom(tablespoon);
-        ingredients.add(cilantro);
-
-        Ingredient blackPepper = new Ingredient();
-        blackPepper.setRecipe(guacamole);
-        blackPepper.setDescription("Black pepper");
-        blackPepper.setAmount(BigDecimal.ONE);
-        blackPepper.setUom(dash);
-        ingredients.add(blackPepper);
-
-        Ingredient tomato = new Ingredient();
-        tomato.setRecipe(guacamole);
-        tomato.setDescription("Tomato");
-        tomato.setAmount(BigDecimal.valueOf(0.5));
-        tomato.setUom(each);
-        ingredients.add(tomato);
-
-        guacamole.setIngredients(ingredients);
         Notes notes = new Notes();
-        notes.setRecipe(guacamole);
         notes.setRecipeNotes("blabla");
         guacamole.setNotes(notes);
 
@@ -194,153 +143,37 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
 
         taco.setServings(6);
         taco.setDifficulty(Difficulty.MODERATE);
-        taco.getCategories().add(mexican);
-        taco.getCategories().add(american);
+        taco.addCategory(mexican);
+        taco.addCategory(american);
 
         Notes notes2 = new Notes();
-        notes2.setRecipe(taco);
         notes2.setRecipeNotes("blahblah");
         taco.setNotes(notes2);
 
-        Set<Ingredient> ingredients2 = new HashSet<>();
-        Ingredient chiliPowder = new Ingredient();
-        chiliPowder.setRecipe(taco);
-        chiliPowder.setDescription("Ancho chili powder");
-        chiliPowder.setAmount(BigDecimal.valueOf(2L));
-        chiliPowder.setUom(tablespoon);
-        ingredients2.add(chiliPowder);
-
-        Ingredient oregano = new Ingredient();
-        oregano.setRecipe(taco);
-        oregano.setDescription("Dried oregano");
-        oregano.setAmount(BigDecimal.ONE);
-        oregano.setUom(teaspoon);
-        ingredients2.add(oregano);
-
-        Ingredient curmin = new Ingredient();
-        curmin.setRecipe(taco);
-        curmin.setDescription("Dried curmin");
-        curmin.setAmount(BigDecimal.ONE);
-        curmin.setUom(teaspoon);
-        ingredients2.add(curmin);
-
-        Ingredient sugar = new Ingredient();
-        sugar.setRecipe(taco);
-        sugar.setDescription("Sugar");
-        sugar.setAmount(BigDecimal.ONE);
-        sugar.setUom(teaspoon);
-        ingredients2.add(sugar);
-
-        Ingredient salt2 = new Ingredient();
-        salt2.setRecipe(taco);
-        salt2.setDescription("Salt");
-        salt2.setAmount(BigDecimal.valueOf(0.5));
-        salt2.setUom(teaspoon);
-        ingredients2.add(salt2);
-
-        Ingredient garlic = new Ingredient();
-        garlic.setRecipe(taco);
-        garlic.setDescription("Clove garlic, finely chopped");
-        garlic.setAmount(BigDecimal.ONE);
-        garlic.setUom(each);
-        ingredients2.add(garlic);
-
-        Ingredient orangeZest = new Ingredient();
-        orangeZest.setRecipe(taco);
-        orangeZest.setDescription("Finely grated orange zest");
-        orangeZest.setAmount(BigDecimal.ONE);
-        orangeZest.setUom(tablespoon);
-        ingredients2.add(orangeZest);
-
-        Ingredient orangeJuice = new Ingredient();
-        orangeJuice.setRecipe(taco);
-        orangeJuice.setDescription("Freshly-squeezed orange juice");
-        orangeJuice.setAmount(BigDecimal.valueOf(3L));
-        orangeJuice.setUom(tablespoon);
-        ingredients2.add(orangeJuice);
-
-        Ingredient oliveOil = new Ingredient();
-        oliveOil.setRecipe(taco);
-        oliveOil.setDescription("Olive oil");
-        oliveOil.setAmount(BigDecimal.valueOf(2L));
-        oliveOil.setUom(tablespoon);
-        ingredients2.add(oliveOil);
-
-        Ingredient chickenThigh = new Ingredient();
-        chickenThigh.setRecipe(taco);
-        chickenThigh.setDescription("Skinless, boneless chicken thigh");
-        chickenThigh.setAmount(BigDecimal.valueOf(6L));
-        chickenThigh.setUom(each);
-        ingredients2.add(chickenThigh);
-
-        Ingredient tortilla = new Ingredient();
-        tortilla.setRecipe(taco);
-        tortilla.setDescription("Small corn tortilla");
-        tortilla.setAmount(BigDecimal.valueOf(8L));
-        tortilla.setUom(each);
-        ingredients2.add(tortilla);
-
-        Ingredient arugula = new Ingredient();
-        arugula.setRecipe(taco);
-        arugula.setDescription("Small baby arugula");
-        arugula.setAmount(BigDecimal.valueOf(3L));
-        arugula.setUom(cup);
-        ingredients2.add(arugula);
-
-        Ingredient avocado2 = new Ingredient();
-        avocado2.setRecipe(taco);
-        avocado2.setDescription("Medium ripe sliced avocado");
-        avocado2.setAmount(BigDecimal.valueOf(2L));
-        avocado2.setUom(each);
-        ingredients2.add(avocado2);
-
-        Ingredient radish = new Ingredient();
-        radish.setRecipe(taco);
-        radish.setDescription("Radish");
-        radish.setAmount(BigDecimal.valueOf(4L));
-        radish.setUom(each);
-        ingredients2.add(radish);
-
-        Ingredient cherryTomato = new Ingredient();
-        cherryTomato.setRecipe(taco);
-        cherryTomato.setDescription("Cherry tomato");
-        cherryTomato.setAmount(BigDecimal.valueOf(0.5));
-        cherryTomato.setUom(pint);
-        ingredients2.add(cherryTomato);
-
-        Ingredient redOnion2 = new Ingredient();
-        redOnion2.setRecipe(taco);
-        redOnion2.setDescription("Red onion");
-        redOnion2.setAmount(BigDecimal.valueOf(0.25));
-        redOnion2.setUom(each);
-        ingredients2.add(redOnion2);
-
-        Ingredient cilantro2 = new Ingredient();
-        cilantro2.setRecipe(taco);
-        cilantro2.setDescription("Roughly chopped cilnatro");
-        cilantro2.setAmount(BigDecimal.ONE);
-        cilantro2.setUom(each);
-        ingredients2.add(cilantro2);
-
-        Ingredient sourCream = new Ingredient();
-        sourCream.setRecipe(taco);
-        sourCream.setDescription("Sour cream");
-        sourCream.setAmount(BigDecimal.valueOf(0.5));
-        sourCream.setUom(cup);
-        ingredients2.add(sourCream);
-
-        Ingredient lime = new Ingredient();
-        lime.setRecipe(taco);
-        lime.setDescription("Lime");
-        lime.setAmount(BigDecimal.ONE);
-        lime.setUom(each);
-        ingredients2.add(lime);
-        taco.setIngredients(ingredients2);
+        taco.addIngredient(new Ingredient("Ancho chili powder", BigDecimal.valueOf(2L), tablespoon));
+        taco.addIngredient(new Ingredient("Dried oregano", BigDecimal.ONE, teaspoon));
+        taco.addIngredient(new Ingredient("Dried curmin", BigDecimal.ONE, teaspoon));
+        taco.addIngredient(new Ingredient("Sugar", BigDecimal.ONE, teaspoon));
+        taco.addIngredient(new Ingredient("Salt", BigDecimal.valueOf(0.5), teaspoon));
+        taco.addIngredient(new Ingredient("Clove garlic, finely chopped", BigDecimal.ONE, each));
+        taco.addIngredient(new Ingredient("Finely grated orange zest", BigDecimal.ONE, tablespoon));
+        taco.addIngredient(new Ingredient("Freshly-squeezed orange juice", BigDecimal.valueOf(3L), tablespoon));
+        taco.addIngredient(new Ingredient("Olive oil", BigDecimal.valueOf(2L), tablespoon));
+        taco.addIngredient(new Ingredient("Skinless, boneless chicken thigh", BigDecimal.valueOf(6L), each));
+        taco.addIngredient(new Ingredient("Small corn tortilla", BigDecimal.valueOf(8L), each));
+        taco.addIngredient(new Ingredient("Small baby arugula", BigDecimal.valueOf(3L), cup));
+        taco.addIngredient(new Ingredient("Medium ripe sliced avocado", BigDecimal.valueOf(2L), each));
+        taco.addIngredient(new Ingredient("Radish", BigDecimal.valueOf(4L), each));
+        taco.addIngredient(new Ingredient("Cherry tomato", BigDecimal.valueOf(0.5), pint));
+        taco.addIngredient(new Ingredient("Red onion", BigDecimal.valueOf(0.25), each));
+        taco.addIngredient(new Ingredient("Roughly chopped cilnatro", BigDecimal.ONE, each));
+        taco.addIngredient(new Ingredient("Sour cream", BigDecimal.valueOf(0.5), cup));
+        taco.addIngredient(new Ingredient("Lime", BigDecimal.ONE, each));
         return recipeSet;
     }
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
-       recipeRepository.saveAll(createRecipes());
+        recipeRepository.saveAll(createRecipes());
     }
 }
