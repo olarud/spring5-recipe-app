@@ -5,6 +5,7 @@ import guru.springframework.services.RecipeService;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
@@ -14,7 +15,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class IndexControllerTest {
-
 
     private IndexController indexController;
 
@@ -27,18 +27,32 @@ public class IndexControllerTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        Recipe recipe = new Recipe();
-        Set<Recipe> recipesData = new HashSet<>();
-        recipesData.add(recipe);
         indexController = new IndexController(recipeService);
-        Mockito.when(recipeService.getRecipes()).thenReturn(recipesData);
     }
 
     @Test
     public void tessGetIndexPage() {
+        //given
+        Set<Recipe> recipesData = new HashSet<>();
+        Recipe recipe = new Recipe();
+        recipe.setId(1L);
+        recipesData.add(recipe);
+
+        Recipe recipe2 = new Recipe();
+        recipe2.setId(2L);
+        recipesData.add(recipe2);
+
+        Mockito.when(recipeService.getRecipes()).thenReturn(recipesData);
+        ArgumentCaptor<Set<Recipe>> argumentCaptor = ArgumentCaptor.forClass(Set.class);
+
+        //when
         String result = indexController.getIndexPage(model);
+
+        //then
         Assert.assertEquals("index", result);
         Mockito.verify(recipeService, Mockito.times(1)).getRecipes();
-        Mockito.verify(model, Mockito.times(1)).addAttribute(Mockito.eq("recipes"), Mockito.anySet());
+        Mockito.verify(model, Mockito.times(1)).addAttribute(Mockito.eq("recipes"), argumentCaptor.capture());
+        Set<Recipe> recipes = argumentCaptor.getValue();
+        Assert.assertEquals(2, recipes.size());
     }
 }
