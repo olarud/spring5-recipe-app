@@ -35,7 +35,8 @@ public class IngredientController {
 
     @GetMapping
     @RequestMapping("recipe/{recipeId}/ingredient/{id}/show")
-    public String showReicpeIngredient(@PathVariable String recipeId, @PathVariable String id, Model model) {
+    public String showReicpeIngredient(@PathVariable String recipeId,
+                                       @PathVariable String id, Model model) {
         model.addAttribute("ingredient", ingredientService.findByRecipeIdAndIngredientId(Long.valueOf(recipeId),
                 Long.valueOf(id)));
         return "recipe/ingredient/show";
@@ -43,7 +44,8 @@ public class IngredientController {
 
     @GetMapping
     @RequestMapping("recipe/{recipeId}/ingredient/{id}/update")
-    public String updateRecipeIngredient(@PathVariable String recipeId, @PathVariable String id, Model model) {
+    public String testUpdateIngredientform(@PathVariable String recipeId,
+                                           @PathVariable String id, Model model) {
         model.addAttribute("ingredient",
                 ingredientService.findByRecipeIdAndIngredientId(Long.valueOf(recipeId), Long.valueOf(id)));
         model.addAttribute("uomList", uomService.listAllUoms());
@@ -56,7 +58,7 @@ public class IngredientController {
         IngredientCommand ingredientCommand = ingredientService.saveIngredientCommand(command);
         log.debug("Saved recipe with ID {}", command.getRecipeId());
         log.debug("Saved ingredient with ID {}", command.getId());
-        return String.format("redirect:recipe/%1$d/ingredient/%2$d/show", ingredientCommand.getRecipeId(),
+        return String.format("redirect:/recipe/%1$d/ingredient/%2$d/show", ingredientCommand.getRecipeId(),
                 ingredientCommand.getId());
     }
 }
